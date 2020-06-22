@@ -1,0 +1,24 @@
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+    tags:
+      - 'v**'
+
+name: Go Mod Validation
+jobs:
+  go-mod-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - run: go mod tidy
+      - run: go mod vendor
+      - name: Check that go.mod and go.sum files are up to date
+        run: |
+          if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
+              git diff
+              echo "##[error] The go.mod and/or go.sum files are out of date, please run 'go mod tidy && go mod vendor' and update your changes"
+              exit 1
+          fi
