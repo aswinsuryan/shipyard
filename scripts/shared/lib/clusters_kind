@@ -274,8 +274,8 @@ function prepare_ovn() {
     pushd ovn-kubernetes || exit
 
     # When updating commit, Update the OVN_SRC_IMAGE to the corressponding commit
-    git checkout 24b0ae73a996e409bfefad7b90cb42224e34be54
-    local OVN_SRC_IMAGE="ghcr.io/ovn-org/ovn-kubernetes/ovn-kube-u:master@sha256:ba102783d520f0474e5c7dd5f2a0a1dce0ec2bda6cd42ac547621892e57c25e2"
+    git checkout ca2fbb5b25c5bd5351bf1d44c8d447cf521fa782
+    local OVN_SRC_IMAGE="quay.io/aswinsuryan/ovn-daemonset-f@sha256:0bb074cf3fb38a75a8be684ec433268e8f7238fd0be62424c5b00260b122087a"
 
     docker pull "${OVN_SRC_IMAGE}"
     docker tag "${OVN_SRC_IMAGE}" "${OVN_IMAGE}"
